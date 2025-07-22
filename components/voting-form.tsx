@@ -22,6 +22,14 @@ const registerNumbers = {
   DS: Array.from({ length: 42 }, (_, i) => `U24PG507DS${String(i + 1).padStart(2, "0")}`),
 }
 
+// Helper function to determine department from register number
+const getDepartmentFromRegisterNumber = (regNumber: string): string => {
+  if (regNumber.includes("CAP")) return "MCA"
+  if (regNumber.includes("CSC")) return "MSC"
+  if (regNumber.includes("DS")) return "DS"
+  return "UNKNOWN"
+}
+
 export function VotingForm() {
   const [studentId, setStudentId] = useState("")
   const [hasVoted, setHasVoted] = useState(false)
@@ -100,15 +108,39 @@ export function VotingForm() {
     }
 
     if (typeof window !== "undefined") {
+      // Get current vote counts
       const storedVoteCounts = localStorage.getItem("electionVoteCounts")
       const currentVoteCounts: Record<string, number> = storedVoteCounts ? JSON.parse(storedVoteCounts) : {}
 
+      // Get current department-wise vote counts
+      const storedDeptVoteCounts = localStorage.getItem("electionDeptVoteCounts")
+      const currentDeptVoteCounts: Record<string, Record<string, number>> = storedDeptVoteCounts
+        ? JSON.parse(storedDeptVoteCounts)
+        : {}
+
+      // Determine voter's department
+      const voterDepartment = selectedDepartment || getDepartmentFromRegisterNumber(studentId)
+
+      // Update overall vote counts
       const newVoteCounts = { ...currentVoteCounts }
       Object.values(votes).forEach((candidateId) => {
         newVoteCounts[candidateId] = (newVoteCounts[candidateId] || 0) + 1
       })
-      localStorage.setItem("electionVoteCounts", JSON.stringify(newVoteCounts))
 
+      // Update department-wise vote counts
+      const newDeptVoteCounts = { ...currentDeptVoteCounts }
+      Object.values(votes).forEach((candidateId) => {
+        if (!newDeptVoteCounts[candidateId]) {
+          newDeptVoteCounts[candidateId] = { MCA: 0, MSC: 0, DS: 0 }
+        }
+        newDeptVoteCounts[candidateId][voterDepartment] = (newDeptVoteCounts[candidateId][voterDepartment] || 0) + 1
+      })
+
+      // Save to localStorage
+      localStorage.setItem("electionVoteCounts", JSON.stringify(newVoteCounts))
+      localStorage.setItem("electionDeptVoteCounts", JSON.stringify(newDeptVoteCounts))
+
+      // Mark student ID as voted
       const newVotedStudentIds = [...votedStudentIds, studentId]
       setVotedStudentIds(newVotedStudentIds)
       localStorage.setItem("votedStudentIds", JSON.stringify(newVotedStudentIds))

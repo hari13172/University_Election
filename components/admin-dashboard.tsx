@@ -23,9 +23,9 @@ const registerNumbers = {
 
 export function AdminDashboard() {
   const [voteCounts, setVoteCounts] = useState<Record<string, number>>({})
+  const [deptVoteCounts, setDeptVoteCounts] = useState<Record<string, Record<string, number>>>({})
   const [votedStudentIds, setVotedStudentIds] = useState<string[]>([])
   const [lastUpdated, setLastUpdated] = useState<Date>(new Date())
-  const [selectedDepartment, setSelectedDepartment] = useState<string>("ALL")
 
   const loadData = () => {
     if (typeof window !== "undefined") {
@@ -33,6 +33,7 @@ export function AdminDashboard() {
       if (storedVotedIds) {
         setVotedStudentIds(JSON.parse(storedVotedIds))
       }
+
       const storedVoteCounts = localStorage.getItem("electionVoteCounts")
       if (storedVoteCounts) {
         setVoteCounts(JSON.parse(storedVoteCounts))
@@ -46,6 +47,21 @@ export function AdminDashboard() {
         })
         setVoteCounts(initialCounts)
       }
+
+      const storedDeptVoteCounts = localStorage.getItem("electionDeptVoteCounts")
+      if (storedDeptVoteCounts) {
+        setDeptVoteCounts(JSON.parse(storedDeptVoteCounts))
+      } else {
+        // Initialize department vote counts if not present
+        const initialDeptCounts: Record<string, Record<string, number>> = {}
+        Object.values(candidates).forEach((posCandidates) => {
+          posCandidates.forEach((candidate:any) => {
+            initialDeptCounts[candidate.id] = { MCA: 0, MSC: 0, DS: 0 }
+          })
+        })
+        setDeptVoteCounts(initialDeptCounts)
+      }
+
       setLastUpdated(new Date())
     }
   }
@@ -90,29 +106,22 @@ export function AdminDashboard() {
     }
   }
 
-  // Get candidate results with department breakdown
+  // Get candidate results with actual department breakdown
   const getCandidateResults = () => {
     return positions.map((pos) => {
       const positionCandidates = candidates[pos.key as keyof CandidatesByPosition]
       const candidateResults = positionCandidates.map((candidate) => {
         const totalVotes = voteCounts[candidate.id] || 0
-
-        // Calculate department-wise votes for this candidate
-        const deptBreakdown = departments.map((dept) => {
-          // This is a simplified calculation - in a real system, you'd track votes by department
-          const deptVotedCount = getDepartmentStats().find((d) => d.key === dept.key)?.voted || 0
-          const estimatedDeptVotes =
-            deptVotedCount > 0 ? Math.round((totalVotes * deptVotedCount) / votedStudentIds.length) : 0
-          return {
-            department: dept.key,
-            votes: estimatedDeptVotes,
-          }
-        })
+        const deptBreakdown = deptVoteCounts[candidate.id] || { MCA: 0, MSC: 0, DS: 0 }
 
         return {
           ...candidate,
           totalVotes,
-          deptBreakdown,
+          deptBreakdown: [
+            { department: "MCA", votes: deptBreakdown.MCA || 0 },
+            { department: "MSC", votes: deptBreakdown.MSC || 0 },
+            { department: "DS", votes: deptBreakdown.DS || 0 },
+          ],
         }
       })
 
