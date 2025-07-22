@@ -15,29 +15,29 @@ export interface CandidatesByPosition {
 
 export const candidates: CandidatesByPosition = {
   president: [
-    { id: "Dhanush D", name: "Dhanush D" },
-    { id: "Udhaya Boopathi V", name: "Udhaya Boopathi V" },
-    { id: "Shaik Aman", name: "Shaik Aman" },
+    { id: "Dhanush D", name: "Dhanush D (MCA)" },
+    { id: "Udhaya Boopathi V", name: "Udhaya Boopathi V (MSC)" },
+    { id: "Shaik Aman", name: "Shaik Aman (MSC DS)" },
   ],
   vicePresident: [
-    { id: "Soundharya I", name: "Soundharya I" },
-    { id: "Gowsalya E", name: "Gowsalya E" },
-    { id: "Thusita D", name: "Thusita D" },
+    { id: "Soundharya I", name: "Soundharya I (MCA)" },
+    { id: "Gowsalya E", name: "Gowsalya E (MSC)" },
+    { id: "Thusita D", name: "Thusita D (MSC DS)" },
   ],
   secretary: [
-    { id: "Vasunthara S", name: "Vasunthara S" },
-    { id: "Krithikasri D", name: "Krithikasri D" },
-    { id: "ArunKumar S", name: "ArunKumar S" },
+    { id: "Vasunthara S", name: "Vasunthara S (MCA)" },
+    { id: "Krithikasri D", name: "Krithikasri D (MSC)" },
+    { id: "ArunKumar S", name: "ArunKumar S (MSC DS)" },
   ],
   jointSecretary: [
-    { id: "Kayalvizhi N", name: "Kayalvizhi N" },
-    { id: "Sumathi M", name: "Sumathi M" },
-    { id: "Dhayanidhi P", name: "Dhayanidhi P" },
+    { id: "Kayalvizhi N", name: "Kayalvizhi N (MCA)" },
+    { id: "Sumathi M", name: "Sumathi M (MSC)" },
+    { id: "Dhayanidhi P", name: "Dhayanidhi P (MSC DS)" },
   ],
   treasury: [
-    { id: "Priyadharshini V", name: "Priyadharshini V" },
-    { id: "Sasidharan M", name: "Sasidharan M" },
-    { id: "Chandru D", name: "Chandru D" },
+    { id: "Priyadharshini V", name: "Priyadharshini V (MCA)" },
+    { id: "Sasidharan M", name: "Sasidharan M (MSC)" },
+    { id: "Chandru D", name: "Chandru D (MSC DS)" },
   ],
 }
 
