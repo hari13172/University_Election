@@ -16,24 +16,28 @@ export interface CandidatesByPosition {
 export const candidates: CandidatesByPosition = {
   president: [
     { id: "Dhanush D", name: "Dhanush D" },
-    { id: "Udhaya Boopathi", name: "Udhaya Boopathi" },
-    { id: "Aman", name: "Aman" },
+    { id: "Udhaya Boopathi V", name: "Udhaya Boopathi V" },
+    { id: "Shaik Aman", name: "Shaik Aman" },
   ],
   vicePresident: [
-    { id: "vp-diana", name: "Diana Prince" },
-    { id: "vp-ethan", name: "Ethan Hunt" },
+    { id: "Soundharya I", name: "Soundharya I" },
+    { id: "Gowsalya E", name: "Gowsalya E" },
+    { id: "Thusita D", name: "Thusita D" },
   ],
   secretary: [
-    { id: "sec-fiona", name: "Fiona Glenanne" },
-    { id: "sec-george", name: "George Costanza" },
+    { id: "Vasunthara S", name: "Vasunthara S" },
+    { id: "Krithikasri D", name: "Krithikasri D" },
+    { id: "ArunKumar S", name: "ArunKumar S" },
   ],
   jointSecretary: [
-    { id: "js-hannah", name: "Hannah Montana" },
-    { id: "js-ivan", name: "Ivan Drago" },
+    { id: "Kayalvizhi N", name: "Kayalvizhi N" },
+    { id: "Sumathi M", name: "Sumathi M" },
+    { id: "Dhayanidhi P", name: "Dhayanidhi P" },
   ],
   treasury: [
-    { id: "tre-jessica", name: "Jessica Rabbit" },
-    { id: "tre-kevin", name: "Kevin McCallister" },
+    { id: "Priyadharshini V", name: "Priyadharshini V" },
+    { id: "Sasidharan M", name: "Sasidharan M" },
+    { id: "Chandru D", name: "Chandru D" },
   ],
 }
 
