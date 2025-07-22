@@ -15,9 +15,9 @@ export interface CandidatesByPosition {
 
 export const candidates: CandidatesByPosition = {
   president: [
-    { id: "pres-alice", name: "Alice Smith" },
-    { id: "pres-bob", name: "Bob Johnson" },
-    { id: "pres-charlie", name: "Charlie Brown" },
+    { id: "Dhanush D", name: "Dhanush D" },
+    { id: "Udhaya Boopathi", name: "Udhaya Boopathi" },
+    { id: "Aman", name: "Aman" },
   ],
   vicePresident: [
     { id: "vp-diana", name: "Diana Prince" },
