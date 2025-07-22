@@ -24,7 +24,7 @@ export function ResultsDisplay() {
         // Initialize vote counts if not present (should ideally be done once)
         const initialCounts: Record<string, number> = {}
         Object.values(candidates).forEach((posCandidates) => {
-          posCandidates.forEach((candidate:any) => {
+          posCandidates.forEach((candidate: any) => {
             initialCounts[candidate.id] = 0
           })
         })
@@ -53,7 +53,6 @@ export function ResultsDisplay() {
       const blob = new Blob([csvContent], { type: "text/csv;charset=utf-8;" })
       const link = document.createElement("a")
       if (link.download !== undefined) {
-        // Feature detection for download attribute
         const url = URL.createObjectURL(blob)
         link.setAttribute("href", url)
         link.setAttribute("download", "election_results.csv")
@@ -61,13 +60,12 @@ export function ResultsDisplay() {
         document.body.appendChild(link)
         link.click()
         document.body.removeChild(link)
-        URL.revokeObjectURL(url) // Clean up the URL object
+        URL.revokeObjectURL(url)
         toast("Export Successful", {
           description: "Election results exported to election_results.csv",
         })
       } else {
-        // Fallback for browsers that don't support download attribute
-        toast("Export Failed",{
+        toast("Export Failed", {
           description: "Your browser does not support direct file downloads. Please copy the content manually.",
         })
       }
@@ -79,6 +77,19 @@ export function ResultsDisplay() {
     }
   }
 
+  // Function to determine the winner for a position
+  const getWinner = (positionKey: string) => {
+    const posCandidates = candidates[positionKey as keyof CandidatesByPosition];
+    if (!posCandidates || posCandidates.length === 0) return null;
+
+    const winner = posCandidates.reduce((max, candidate) => {
+      const count = voteCounts[candidate.id] || 0;
+      return count > (voteCounts[max.id] || 0) ? candidate : max;
+    });
+
+    return winner;
+  };
+
   return (
     <div className="space-y-4">
       <h2 className="text-2xl font-bold text-center text-gray-900 dark:text-gray-50">Election Results (Local)</h2>
@@ -87,23 +98,31 @@ export function ResultsDisplay() {
         would need to be aggregated manually.
       </p>
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
-        {positions.map((pos) => (
-          <Card key={`results-${pos.key}`}>
-            <CardHeader>
-              <CardTitle className="text-lg">{pos.title}</CardTitle>
-            </CardHeader>
-            <CardContent>
-              <ul className="space-y-1">
-                {candidates[pos.key as keyof CandidatesByPosition].map((candidate) => (
-                  <li key={`result-${candidate.id}`} className="flex justify-between items-center">
-                    <span>{candidate.name}</span>
-                    <span className="font-semibold">{voteCounts[candidate.id] || 0}</span>
-                  </li>
-                ))}
-              </ul>
-            </CardContent>
-          </Card>
-        ))}
+        {positions.map((pos) => {
+          const winner = getWinner(pos.key);
+          return (
+            <Card key={`results-${pos.key}`}>
+              <CardHeader>
+                <CardTitle className="text-lg">{pos.title}</CardTitle>
+              </CardHeader>
+              <CardContent>
+                <ul className="space-y-1">
+                  {candidates[pos.key as keyof CandidatesByPosition].map((candidate) => (
+                    <li key={`result-${candidate.id}`} className="flex justify-between items-center">
+                      <span>{candidate.name}</span>
+                      <span className="font-semibold">{voteCounts[candidate.id] || 0}</span>
+                    </li>
+                  ))}
+                </ul>
+                {winner && (
+                  <p className="mt-2 text-green-600 dark:text-green-400 font-semibold">
+                    Winner: {winner.name} with {voteCounts[winner.id]} votes
+                  </p>
+                )}
+              </CardContent>
+            </Card>
+          );
+        })}
       </div>
       <Button onClick={exportVoteData} className="w-full mt-4">
         Export Results to CSV
@@ -112,5 +131,5 @@ export function ResultsDisplay() {
         (Includes voted student IDs and candidate vote counts from this browser)
       </p>
     </div>
-  )
+  );
 }
