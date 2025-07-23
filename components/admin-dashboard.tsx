@@ -11,14 +11,14 @@ import { Users, Vote, TrendingUp, Download, RefreshCw, BarChart3 } from "lucide-
 
 const departments = [
   { key: "MCA", name: "Master of Computer Applications", total: 30 },
-  { key: "MSC", name: "Master of Science", total: 44 },
-  { key: "DS", name: "Data Science", total: 42 },
+  { key: "MSC_CS", name: "Master of Science", total: 44 },
+  { key: "MSC_DS", name: "Data Science", total: 42 },
 ]
 
 const registerNumbers = {
-  MCA: Array.from({ length: 30 }, (_, i) => `U24PG507CAP${String(i + 1).padStart(2, "0")}`),
-  MSC: Array.from({ length: 44 }, (_, i) => `U24PG507CSC${String(i + 1).padStart(2, "0")}`),
-  DS: Array.from({ length: 42 }, (_, i) => `U24PG507DS${String(i + 1).padStart(2, "0")}`),
+  MCA: Array.from({ length: 30 }, (_, i) => `U24PG507CAP0${String(i + 1).padStart(2, "0")}`),
+  MSC_CS: Array.from({ length: 44 }, (_, i) => `U24PG507CSC0${String(i + 1).padStart(2, "0")}`),
+  MSC_DS: Array.from({ length: 42 }, (_, i) => `U24PG507DS0${String(i + 1).padStart(2, "0")}`),
 }
 
 export function AdminDashboard() {
@@ -119,8 +119,8 @@ export function AdminDashboard() {
           totalVotes,
           deptBreakdown: [
             { department: "MCA", votes: deptBreakdown.MCA || 0 },
-            { department: "MSC", votes: deptBreakdown.MSC || 0 },
-            { department: "DS", votes: deptBreakdown.DS || 0 },
+            { department: "MSC CS", votes: deptBreakdown.MSC || 0 },
+            { department: "MSC DS", votes: deptBreakdown.DS || 0 },
           ],
         }
       })
@@ -162,11 +162,11 @@ export function AdminDashboard() {
     // Position-wise Results
     candidateResults.forEach((position) => {
       csvContent += `${position.title.toUpperCase()} RESULTS\n`
-      csvContent += "Candidate,Total Votes,MCA Votes,MSC Votes,DS Votes\n"
+      csvContent += "Candidate,Total Votes,MCA Votes,MSC CS Votes,MSC DS Votes\n"
       position.candidates.forEach((candidate) => {
         const mcaVotes = candidate.deptBreakdown.find((d) => d.department === "MCA")?.votes || 0
-        const mscVotes = candidate.deptBreakdown.find((d) => d.department === "MSC")?.votes || 0
-        const dsVotes = candidate.deptBreakdown.find((d) => d.department === "DS")?.votes || 0
+        const mscVotes = candidate.deptBreakdown.find((d) => d.department === "MSC CS")?.votes || 0
+        const dsVotes = candidate.deptBreakdown.find((d) => d.department === "MSC DS")?.votes || 0
         csvContent += `"${candidate.name}",${candidate.totalVotes},${mcaVotes},${mscVotes},${dsVotes}\n`
       })
       csvContent += "\n"
@@ -345,8 +345,8 @@ export function AdminDashboard() {
                       <Progress value={percentage} className="h-2" />
                       <div className="flex justify-between text-xs text-muted-foreground">
                         <span>MCA: {candidate.deptBreakdown.find((d) => d.department === "MCA")?.votes || 0}</span>
-                        <span>MSC: {candidate.deptBreakdown.find((d) => d.department === "MSC")?.votes || 0}</span>
-                        <span>DS: {candidate.deptBreakdown.find((d) => d.department === "DS")?.votes || 0}</span>
+                        <span>MSC CS: {candidate.deptBreakdown.find((d) => d.department === "MSC CS")?.votes || 0}</span>
+                        <span>MSC DS: {candidate.deptBreakdown.find((d) => d.department === "MSC DS")?.votes || 0}</span>
                       </div>
                     </div>
                   )

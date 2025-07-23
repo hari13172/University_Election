@@ -21,30 +21,33 @@ interface CandidatesByPosition {
   vicePresident: Candidate[]
   secretary: Candidate[]
   jointSecretary: Candidate[]
-  treasury: Candidate[]
+Treasurer: Candidate[]
 }
-
-const candidates: CandidatesByPosition = {
+export const candidates: CandidatesByPosition = {
   president: [
-    { id: "pres-alice", name: "Alice Smith" },
-    { id: "pres-bob", name: "Bob Johnson" },
-    { id: "pres-charlie", name: "Charlie Brown" },
+    { id: "Dhanush D", name: "Dhanush D (MCA)" },
+    { id: "Udhaya Boopathi V", name: "Udhaya Boopathi V (MSC CS)" },
+    { id: "Shaik Aman", name: "Shaik Aman (MSC DS)" },
   ],
   vicePresident: [
-    { id: "vp-diana", name: "Diana Prince" },
-    { id: "vp-ethan", name: "Ethan Hunt" },
+    { id: "Soundharya I", name: "Soundharya I (MCA)" },
+    { id: "Gowsalya E", name: "Gowsalya E (MSC CS)" },
+    { id: "Thusita D", name: "Thusita D (MSC DS)" },
   ],
   secretary: [
-    { id: "sec-fiona", name: "Fiona Glenanne" },
-    { id: "sec-george", name: "George Costanza" },
+    { id: "Vasunthara S", name: "Vasunthara S (MCA)" },
+    { id: "Krithikasri D", name: "Krithikasri D (MSC CS)" },
+    { id: "ArunKumar S", name: "ArunKumar S (MSC DS)" },
   ],
   jointSecretary: [
-    { id: "js-hannah", name: "Hannah Montana" },
-    { id: "js-ivan", name: "Ivan Drago" },
+    { id: "Kayalvizhi N", name: "Kayalvizhi N (MCA)" },
+    { id: "Sumathi M", name: "Sumathi M (MSC CS)" },
+    { id: "Dhayanidhi P", name: "Dhayanidhi P (MSC DS)" },
   ],
-  treasury: [
-    { id: "tre-jessica", name: "Jessica Rabbit" },
-    { id: "tre-kevin", name: "Kevin McCallister" },
+Treasurer: [
+    { id: "KalaiKannan D", name: "KalaiKannan D (MCA)" },
+    { id: "Sasidharan M", name: "Sasidharan M (MSC)" },
+    { id: "Chandru D", name: "Chandru D (MSC DS)" },
   ],
 }
 
@@ -53,7 +56,7 @@ const positions = [
   { key: "vicePresident", title: "Vice-President" },
   { key: "secretary", title: "Secretary" },
   { key: "jointSecretary", title: "Joint-Secretary" },
-  { key: "treasury", title: "Treasury" },
+  { key: "Treasurer", title: "Treasurer" },
 ]
 
 export function ElectionForm() {
@@ -77,7 +80,7 @@ export function ElectionForm() {
         // Initialize vote counts if not present
         const initialCounts: Record<string, number> = {}
         Object.values(candidates).forEach((posCandidates) => {
-          posCandidates.forEach((candidate:any) => {
+          posCandidates.forEach((candidate: any) => {
             initialCounts[candidate.id] = 0
           })
         })

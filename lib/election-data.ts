@@ -10,33 +10,33 @@ export interface CandidatesByPosition {
   vicePresident: Candidate[]
   secretary: Candidate[]
   jointSecretary: Candidate[]
-  treasury: Candidate[]
+Treasurer: Candidate[]
 }
 
 export const candidates: CandidatesByPosition = {
   president: [
     { id: "Dhanush D", name: "Dhanush D (MCA)" },
-    { id: "Udhaya Boopathi V", name: "Udhaya Boopathi V (MSC)" },
+    { id: "Udhaya Boopathi V", name: "Udhaya Boopathi V (MSC CS)" },
     { id: "Shaik Aman", name: "Shaik Aman (MSC DS)" },
   ],
   vicePresident: [
     { id: "Soundharya I", name: "Soundharya I (MCA)" },
-    { id: "Gowsalya E", name: "Gowsalya E (MSC)" },
+    { id: "Gowsalya E", name: "Gowsalya E (MSC CS)" },
     { id: "Thusita D", name: "Thusita D (MSC DS)" },
   ],
   secretary: [
     { id: "Vasunthara S", name: "Vasunthara S (MCA)" },
-    { id: "Krithikasri D", name: "Krithikasri D (MSC)" },
+    { id: "Krithikasri D", name: "Krithikasri D (MSC CS)" },
     { id: "ArunKumar S", name: "ArunKumar S (MSC DS)" },
   ],
   jointSecretary: [
     { id: "Kayalvizhi N", name: "Kayalvizhi N (MCA)" },
-    { id: "Sumathi M", name: "Sumathi M (MSC)" },
+    { id: "Sumathi M", name: "Sumathi M (MSC CS)" },
     { id: "Dhayanidhi P", name: "Dhayanidhi P (MSC DS)" },
   ],
-  treasury: [
+Treasurer: [
     { id: "KalaiKannan D", name: "KalaiKannan D (MCA)" },
-    { id: "Sasidharan M", name: "Sasidharan M (MSC)" },
+    { id: "Sasidharan M", name: "Sasidharan M (MSC CS)" },
     { id: "Chandru D", name: "Chandru D (MSC DS)" },
   ],
 }
@@ -46,7 +46,7 @@ export const positions = [
   { key: "vicePresident", title: "Vice-President" },
   { key: "secretary", title: "Secretary" },
   { key: "jointSecretary", title: "Joint-Secretary" },
-  { key: "treasury", title: "Treasury" },
+  { key: "Treasurer", title: "Treasurer" },
 ]
 
 // Example sitemap generation (as per Next.js documentation [^1])

@@ -12,21 +12,21 @@ import { toast } from "sonner"
 
 const departments = [
   { key: "MCA", name: "Master of Computer Applications" },
-  { key: "MSC", name: "Master of Science" },
-  { key: "DS", name: "Data Science" },
+  { key: "MSC_CS", name: "Master of Science" },
+  { key: "MSC_DS", name: "Data Science" },
 ]
 
 const registerNumbers = {
-  MCA: Array.from({ length: 30 }, (_, i) => `U24PG507CAP${String(i + 1).padStart(2, "0")}`),
-  MSC: Array.from({ length: 44 }, (_, i) => `U24PG507CSC${String(i + 1).padStart(2, "0")}`),
-  DS: Array.from({ length: 42 }, (_, i) => `U24PG507DS${String(i + 1).padStart(2, "0")}`),
+  MCA: Array.from({ length: 30 }, (_, i) => `U24PG507CAP0${String(i + 1).padStart(2, "0")}`),
+  MSC_CS: Array.from({ length: 44 }, (_, i) => `U24PG507CSC0${String(i + 1).padStart(2, "0")}`),
+  MSC_DS: Array.from({ length: 42 }, (_, i) => `U24PG507DS0${String(i + 1).padStart(2, "0")}`),
 }
 
 // Helper function to determine department from register number
 const getDepartmentFromRegisterNumber = (regNumber: string): string => {
   if (regNumber.includes("CAP")) return "MCA"
-  if (regNumber.includes("CSC")) return "MSC"
-  if (regNumber.includes("DS")) return "DS"
+  if (regNumber.includes("CSC")) return "MSC CS"
+  if (regNumber.includes("DS")) return "MSC DS"
   return "UNKNOWN"
 }
 
@@ -86,7 +86,7 @@ export function VotingForm() {
     e.preventDefault()
 
     if (!studentId) {
-      toast("Missing Student ID", {
+      toast.success("Missing Student ID", {
         description: "Please enter your student ID to vote.",
       })
       return
@@ -146,7 +146,7 @@ export function VotingForm() {
       localStorage.setItem("votedStudentIds", JSON.stringify(newVotedStudentIds))
     }
 
-    toast("Vote Submitted!", {
+    toast.success("Vote Submitted!", {
       description: "Your vote has been successfully recorded. Ready for the next voter.",
     })
 
