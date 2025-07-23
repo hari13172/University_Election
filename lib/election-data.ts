@@ -35,7 +35,7 @@ export const candidates: CandidatesByPosition = {
     { id: "Dhayanidhi P", name: "Dhayanidhi P (MSC DS)" },
   ],
   treasury: [
-    { id: "Priyadharshini V", name: "Priyadharshini V (MCA)" },
+    { id: "KalaiKannan D", name: "KalaiKannan D (MCA)" },
     { id: "Sasidharan M", name: "Sasidharan M (MSC)" },
     { id: "Chandru D", name: "Chandru D (MSC DS)" },
   ],
