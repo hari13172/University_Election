@@ -19,7 +19,7 @@ const departments = [
 const registerNumbers = {
   MCA: Array.from({ length: 30 }, (_, i) => `U24PG507CAP0${String(i + 1).padStart(2, "0")}`),
   MSC_CS: Array.from({ length: 44 }, (_, i) => `U24PG507CSC0${String(i + 1).padStart(2, "0")}`),
-  MSC_DS: Array.from({ length: 42 }, (_, i) => `U24PG507DS0${String(i + 1).padStart(2, "0")}`),
+  MSC_DS: Array.from({ length: 43 }, (_, i) => `U24PG507DS0${String(i + 1).padStart(2, "0")}`),
 }
 
 // Helper function to determine department from register number
